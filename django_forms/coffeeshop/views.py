@@ -41,3 +41,6 @@ def signup(request):
             return redirect(reverse('coffeeshop:thanks'))
 
     return render(request, 'coffeeshop/signup.html', {'form': form})
+
+def details(request):
+    form = UserDetailForm
