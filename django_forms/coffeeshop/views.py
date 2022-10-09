@@ -43,4 +43,12 @@ def signup(request):
     return render(request, 'coffeeshop/signup.html', {'form': form})
 
 def details(request):
-    form = UserDetailForm
+    form = UserDetailForm(request.POST)
+    if form.is_valid():
+        user = form.save()
+        form.save()
+        return redirect(reverse('coffeeshop:thanks'))
+    else:
+        form = UserDetailForm(initial={'username': request.user.username, 'email': request.user.email})
+
+    return render(request, 'coffeeshop/signup.html', {'form': form})
